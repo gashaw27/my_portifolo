@@ -26,5 +26,6 @@
     "postcss": "^8.5.10",
     "tailwindcss": "^4.2.2",
     "vite": "^8.0.4"
+    "@tailwindcss/postcss": "^4.0.0",
   }
 }

@@ -159,12 +159,17 @@ function App() {
               </svg>
             </a>
 
-            {/* Telegram */}
-            <a href="https://t.me/@gaga2327" target="_blank" className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-sky-500 transition-all shadow-lg group">
-              <svg className="w-5 h-5 fill-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-2.003 9.464c-.149.659-.541.823-1.091.515l-3.051-2.247-1.472 1.417c-.163.163-.3.299-.614.299l.219-3.107 5.655-5.108c.246-.219-.054-.341-.381-.123l-6.991 4.402-3.012-.942c-.655-.205-.668-.655.137-.969l11.771-4.535c.545-.205 1.022.122.842.928z"/>
-              </svg>
-            </a>
+                {/* Telegram Icon */}
+<a 
+  href="https://t.me/@gaga2327" // እዚህ ጋር ትክክለኛ ዩዘር ኔምህን አስገባ
+  target="_blank" 
+  rel="noreferrer" 
+  className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-sky-500 transition-all shadow-lg group"
+>
+  <svg className="w-5 h-5 fill-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-2.003 9.464c-.149.659-.541.823-1.091.515l-3.051-2.247-1.472 1.417c-.163.163-.3.299-.614.299l.219-3.107 5.655-5.108c.246-.219-.054-.341-.381-.123l-6.991 4.402-3.012-.942c-.655-.205-.668-.655.137-.969l11.771-4.535c.545-.205 1.022.122.842.928z"/>
+  </svg>
+</a>
           </div>
 
           <div className="w-full h-[1px] bg-slate-900 mb-10"></div>

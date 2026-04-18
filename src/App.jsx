@@ -161,7 +161,7 @@ function App() {
 
                 {/* Telegram Icon */}
 <a 
-  href="https://t.me/@gaga2327" // እዚህ ጋር ትክክለኛ ዩዘር ኔምህን አስገባ
+  href="https://t.me/gaga2327" // እዚህ ጋር ትክክለኛ ዩዘር ኔምህን አስገባ
   target="_blank" 
   rel="noreferrer" 
   className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-sky-500 transition-all shadow-lg group"

@@ -101,18 +101,18 @@ function App() {
         <h2 className="text-3xl md:text-4xl font-black mb-12 md:mb-16 uppercase tracking-tighter">{t.projectTitle}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-            <div className="w-16 h-16 bg-blue-50 rounded-2xl mb-6 flex items-center justify-center text-blue-600 text-3xl font-black">W</div>
+            <div className="w-16 h-16 bg-blue-50 rounded-2xl mb-6 flex items-center justify-center text-blue-600 text-3xl font-black">Web programing </div>
             <h3 className="text-xl font-black mb-2 tracking-tight">E-Learning</h3>
             <p className="text-slate-500 font-medium text-xs leading-relaxed">Full educational platform for students.</p>
           </div>
           <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-            <div className="w-16 h-16 bg-indigo-50 rounded-2xl mb-6 flex items-center justify-center text-indigo-600 text-3xl font-black">AI</div>
+            <div className="w-16 h-16 bg-indigo-50 rounded-2xl mb-6 flex items-center justify-center text-indigo-600 text-3xl font-black">AI development</div>
             <h3 className="text-xl font-black mb-2 tracking-tight">Sentiment</h3>
             <p className="text-slate-500 font-medium text-xs leading-relaxed">Amharic Sentiment Analysis tool.</p>
           </div>
           <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-            <div className="w-16 h-16 bg-slate-100 rounded-2xl mb-6 flex items-center justify-center text-slate-800 text-3xl font-black">Net</div>
-            <h3 className="text-xl font-black mb-2 tracking-tight">Network</h3>
+            <div className="w-16 h-16 bg-slate-100 rounded-2xl mb-6 flex items-center justify-center text-slate-800 text-3xl font-black">Network and System adminstration</div>
+            <h3 className="text-xl font-black mb-2 tracking-tight">Network and System adminstratio</h3>
             <p className="text-slate-500 font-medium text-xs leading-relaxed">Secure Enterprise networking.</p>
           </div>
         </div>

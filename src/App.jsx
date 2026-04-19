@@ -96,27 +96,66 @@ function App() {
         </div>
       </section>
 
-      {/* --- Projects Section --- */}
-      <section id="projects" className="max-w-6xl mx-auto px-4 md:px-6 py-16 md:py-24">
-        <h2 className="text-3xl md:text-4xl font-black mb-12 md:mb-16 uppercase tracking-tighter">{t.projectTitle}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-          <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-            <div className="w-16 h-16 bg-blue-50 rounded-2xl mb-6 flex items-center justify-center text-blue-600 text-3xl font-black">Web programing </div>
-            <h3 className="text-xl font-black mb-2 tracking-tight">E-Learning</h3>
-            <p className="text-slate-500 font-medium text-xs leading-relaxed">Full educational platform for students.</p>
+    {/* --- Refined Projects Section --- */}
+      <section id="projects" className="max-w-6xl mx-auto px-4 md:px-6 py-20 md:py-32">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-16">
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">{t.projectTitle}</h2>
+          <div className="h-1 flex-1 bg-blue-50 rounded-full hidden md:block"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          
+          {/* Project 1: Web Programming */}
+          <div className="group bg-white rounded-[3rem] p-8 border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+               <span className="text-8xl font-black">W</span>
+            </div>
+            <div className="w-16 h-16 bg-blue-600 rounded-2xl mb-8 flex items-center justify-center text-white shadow-lg shadow-blue-100">
+               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            </div>
+            <h3 className="text-2xl font-black mb-4 leading-tight">Web Programming</h3>
+            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-6">Full stack educational platform built with modern web technologies for students.</p>
+            <div className="flex gap-2">
+               <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase">React</span>
+               <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase">NodeJS</span>
+            </div>
           </div>
-          <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-            <div className="w-16 h-16 bg-indigo-50 rounded-2xl mb-6 flex items-center justify-center text-indigo-600 text-3xl font-black">AI development</div>
-            <h3 className="text-xl font-black mb-2 tracking-tight">Sentiment</h3>
-            <p className="text-slate-500 font-medium text-xs leading-relaxed">Amharic Sentiment Analysis tool.</p>
+
+          {/* Project 2: AI Development */}
+          <div className="group bg-white rounded-[3rem] p-8 border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+               <span className="text-8xl font-black">AI</span>
+            </div>
+            <div className="w-16 h-16 bg-indigo-600 rounded-2xl mb-8 flex items-center justify-center text-white shadow-lg shadow-indigo-100">
+               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.989-2.386l-.548-.547z"></path></svg>
+            </div>
+            <h3 className="text-2xl font-black mb-4 leading-tight">AI Development</h3>
+            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-6">Amharic Sentiment Analysis tool developed to process and analyze local languages.</p>
+            <div className="flex gap-2">
+               <span className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-bold uppercase">Python</span>
+               <span className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-bold uppercase">ML</span>
+            </div>
           </div>
-          <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 hover:shadow-xl transition-all">
-            <div className="w-16 h-16 bg-slate-100 rounded-2xl mb-6 flex items-center justify-center text-slate-800 text-3xl font-black">Network and System adminstration</div>
-            <h3 className="text-xl font-black mb-2 tracking-tight">Network and System adminstratio</h3>
-            <p className="text-slate-500 font-medium text-xs leading-relaxed">Secure Enterprise networking.</p>
+
+          {/* Project 3: Network & System Admin */}
+          <div className="group bg-white rounded-[3rem] p-8 border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+               <span className="text-8xl font-black">N</span>
+            </div>
+            <div className="w-16 h-16 bg-slate-800 rounded-2xl mb-8 flex items-center justify-center text-white shadow-lg shadow-slate-200">
+               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            </div>
+            <h3 className="text-2xl font-black mb-4 leading-tight">Network & System Admin</h3>
+            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-6">Designing and securing enterprise networks with focus on system integrity and speed.</p>
+            <div className="flex gap-2">
+               <span className="px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-[10px] font-bold uppercase">Cisco</span>
+               <span className="px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-[10px] font-bold uppercase">Server</span>
+            </div>
           </div>
+
         </div>
       </section>
+     
 
       {/* --- Contact Section --- */}
       <section id="contact" className="max-w-2xl mx-auto px-4 md:px-6 py-16 md:py-24 bg-white rounded-[2.5rem] md:rounded-[4rem] shadow-xl mb-24 border border-slate-50">

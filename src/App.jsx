@@ -103,7 +103,7 @@ function App() {
       aboutTitle: "About Me",
       skillsTitle: "Technical Skills",
       projectTitle: "Featured Projects",
-      langBtn: "አማርኛ", footer: "Built with ❤️ by Gashaw"
+      langBtn: "አማርኛ", footer: "Built with  by Gashaw"
     },
     am: {
       navAbout: "ስለ እኔ", navSkills: "ሙያ", navProjects: "ስራዎች",
@@ -218,7 +218,7 @@ function App() {
               <svg className="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-2.003 9.464c-.149.659-.541.823-1.091.515l-3.051-2.247-1.472 1.417c-.163.163-.3.299-.614.299l.219-3.107 5.655-5.108c.246-.219-.054-.341-.381-.123l-6.991 4.402-3.012-.942c-.655-.205-.668-.655.137-.969l11.771-4.535c.545-.205 1.022.122.842.928z"/></svg>
             </a>
           </div>
-          <a href="mailto:gashaw@gmail.com" className="text-slate-400 font-bold text-lg mb-10 hover:text-blue-500 transition-all underline decoration-blue-500/20 underline-offset-8 italic">gashaw@gmail.com</a>
+          <a href="mailto:gashawsitotaw2@gmail.com" className="text-slate-400 font-bold text-lg mb-10 hover:text-blue-500 transition-all underline decoration-blue-500/20 underline-offset-8 italic">gashawsitotaw2@gmail.com</a>
           <p className="text-slate-800 font-black text-[9px] uppercase tracking-[0.5em]">{t.footer}</p>
         </div>
       </footer>

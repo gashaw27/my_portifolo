@@ -19,7 +19,7 @@ function App() {
       runBtn: "View Live Run",
       notRun: "Can't Run Online",
       langBtn: "አማርኛ",
-      footer: "Built with ❤️ by Gashaw"
+      footer: "Built with  by Gashaw"
     },
     am: {
       navHome: "ዋና ገጽ", navAbout: "ስለ እኔ", navSkills: "ሙያዎቼ", navProjects: "ስራዎቼ", navContact: "አግኙኝ",

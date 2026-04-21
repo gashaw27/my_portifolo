@@ -1,27 +1,33 @@
 import { useState } from 'react'
 import myPhoto from './assets/me.png'
 
-// --- 1. Real Scientific Calculator Component ---
+// --- 1. Advanced & Compact Scientific Calculator ---
 function Calculator({ onClose }) {
   const [display, setDisplay] = useState("");
   
   const handleClick = (val) => {
+    const operators = ["+", "-", "*", "/", "."];
+    const lastChar = display.slice(-1);
+
+    // Error ካለ በራሱ እንዲያጠፋው (Auto-Clear)
+    if (display === "Error") {
+      if (val === "C" || val === "DEL") { setDisplay(""); return; }
+      if (["sin", "cos", "tan", "√"].includes(val)) { setDisplay(val + "("); return; }
+      setDisplay(val); 
+      return;
+    }
+
     if (val === "=") {
       try {
         if (!display) return;
         let expression = display;
-
-        // 1. Replace Square Root: √(number) -> Math.sqrt(number)
         expression = expression.replace(/√\(/g, 'Math.sqrt(');
-
-        // 2. Replace Trig functions with Degree to Radian conversion
-        // Logic: sin(x) -> Math.sin(x * Math.PI / 180)
         expression = expression.replace(/sin\(([^)]+)\)/g, 'Math.sin(($1)*Math.PI/180)');
         expression = expression.replace(/cos\(([^)]+)\)/g, 'Math.cos(($1)*Math.PI/180)');
         expression = expression.replace(/tan\(([^)]+)\)/g, 'Math.tan(($1)*Math.PI/180)');
 
-        // 3. Final Calculation
         const result = eval(expression);
+        if (isNaN(result) || !isFinite(result)) throw new Error();
         setDisplay(String(Number(result).toFixed(3)));
       } catch {
         setDisplay("Error");
@@ -31,13 +37,16 @@ function Calculator({ onClose }) {
     } else if (val === "DEL") {
       setDisplay(display.slice(0, -1));
     } else if (["sin", "cos", "tan", "√"].includes(val)) {
-      setDisplay(display + val + "("); // Automatically adds opening bracket
+      setDisplay(display + val + "(");
     } else {
-      setDisplay(display + val);
+      if (operators.includes(val) && operators.includes(lastChar)) {
+        setDisplay(display.slice(0, -1) + val);
+      } else {
+        setDisplay(display + val);
+      }
     }
   };
 
-  // Buttons organized for a professional scientific look
   const buttons = [
     "sin", "cos", "tan", "C",
     "(", ")", "√", "/",
@@ -48,38 +57,35 @@ function Calculator({ onClose }) {
   ];
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[200] flex items-center justify-center p-4">
-      <div className="bg-slate-950 w-full max-w-[350px] rounded-[2.5rem] p-6 shadow-2xl border border-slate-800 animate-in zoom-in duration-300">
-        <div className="flex justify-between items-center mb-6">
-          <div className="text-left">
-            <h3 className="text-white font-black tracking-widest text-[10px] uppercase">Gashaw Scientific</h3>
-            <div className="flex gap-1 mt-1">
-              <div className="w-2 h-1 bg-blue-600 rounded-full"></div>
-              <div className="w-4 h-1 bg-blue-600/30 rounded-full"></div>
-            </div>
+    <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-[200] flex items-center justify-center p-4">
+      <div className="bg-[#0f172a] w-full max-w-[320px] rounded-[2rem] p-5 shadow-2xl border border-slate-800 animate-in zoom-in duration-200">
+        <div className="flex justify-between items-center mb-5">
+          <div className="text-left border-l-2 border-blue-600 pl-3">
+            <h3 className="text-white font-black tracking-tighter text-[10px] uppercase">Gashaw Scientific</h3>
+            <span className="text-blue-500 font-bold text-[8px] uppercase tracking-widest">v2.0 Pro</span>
           </div>
-          <button onClick={onClose} className="w-10 h-10 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-red-500 transition-all font-bold">✕</button>
+          <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-red-500 transition-all font-bold text-xs">✕</button>
         </div>
         
-        <div className="bg-slate-900 h-28 rounded-3xl mb-6 flex flex-col justify-center items-end px-6 border border-slate-800/50 shadow-inner">
-          <span className="text-[9px] text-slate-600 uppercase font-black mb-1 tracking-widest">Scientific Mode</span>
-          <div className="text-2xl font-mono text-green-400 overflow-hidden text-right w-full tracking-tighter">
+        <div className="bg-slate-900 h-24 rounded-2xl mb-5 flex flex-col justify-center items-end px-5 border border-slate-800/50 shadow-inner overflow-hidden">
+          <span className="text-[8px] text-slate-500 uppercase font-black mb-1">Display</span>
+          <div className="text-xl md:text-2xl font-mono text-green-400 overflow-x-auto whitespace-nowrap text-right w-full scrollbar-hide">
             {display || "0"}
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-2">
           {buttons.map((btn) => (
             <button
               key={btn}
               onClick={() => handleClick(btn)}
-              className={`h-12 md:h-14 rounded-2xl font-black text-sm transition-all active:scale-90 ${
-                btn === "=" ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700" :
+              className={`h-11 md:h-12 rounded-xl font-bold text-xs transition-all active:scale-90 ${
+                btn === "=" ? "bg-blue-600 text-white col-span-1 shadow-lg shadow-blue-500/20 hover:bg-blue-700" :
                 btn === "C" ? "bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white" :
-                btn === "DEL" ? "bg-orange-500/10 text-orange-500 hover:bg-orange-500 hover:text-white" :
+                btn === "DEL" ? "bg-slate-700 text-slate-200 hover:bg-slate-600" :
                 ["sin", "cos", "tan", "√", "(", ")"].includes(btn) ? "bg-blue-900/20 text-blue-400 border border-blue-900/30 hover:bg-blue-600 hover:text-white" :
                 ["/", "*", "-", "+"].includes(btn) ? "bg-slate-800 text-blue-500 hover:bg-blue-600 hover:text-white" :
-                "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                "bg-slate-800/50 text-slate-400 hover:bg-slate-700"
               }`}
             >
               {btn}
@@ -103,7 +109,7 @@ function App() {
       aboutTitle: "About Me",
       skillsTitle: "Technical Skills",
       projectTitle: "Featured Projects",
-      langBtn: "አማርኛ", footer: "Built with  by Gashaw"
+      langBtn: "አማርኛ", footer: "Built with ❤️ by Gashaw"
     },
     am: {
       navAbout: "ስለ እኔ", navSkills: "ሙያ", navProjects: "ስራዎች",
@@ -139,7 +145,7 @@ function App() {
 
       {/* Hero */}
       <section id="home" className="pt-32 pb-20 md:pt-60 md:pb-40 text-center px-4">
-        <h2 className="text-5xl md:text-9xl font-black mb-4 tracking-tighter leading-none">{t.heroHi} <span className="text-blue-600 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gashaw ...</span></h2>
+        <h2 className="text-5xl md:text-9xl font-black mb-4 tracking-tighter leading-none">{t.heroHi} <span className="text-blue-600">Gashaw ...</span></h2>
         <p className="text-lg md:text-3xl font-bold text-slate-300 mb-10 uppercase tracking-widest">{t.heroRole}</p>
         <a href="#projects" className="inline-block bg-blue-600 text-white px-10 py-5 rounded-2xl font-black shadow-2xl shadow-blue-200 hover:scale-105 transition-all uppercase tracking-widest text-xs">View Projects</a>
       </section>
@@ -218,7 +224,7 @@ function App() {
               <svg className="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-2.003 9.464c-.149.659-.541.823-1.091.515l-3.051-2.247-1.472 1.417c-.163.163-.3.299-.614.299l.219-3.107 5.655-5.108c.246-.219-.054-.341-.381-.123l-6.991 4.402-3.012-.942c-.655-.205-.668-.655.137-.969l11.771-4.535c.545-.205 1.022.122.842.928z"/></svg>
             </a>
           </div>
-          <a href="mailto:gashawsitotaw2@gmail.com" className="text-slate-400 font-bold text-lg mb-10 hover:text-blue-500 transition-all underline decoration-blue-500/20 underline-offset-8 italic">gashawsitotaw2@gmail.com</a>
+          <a href="mailto:gashaw@gmail.com" className="text-slate-400 font-bold text-lg mb-10 hover:text-blue-500 transition-all underline decoration-blue-500/20 underline-offset-8 italic">gashaw@gmail.com</a>
           <p className="text-slate-800 font-black text-[9px] uppercase tracking-[0.5em]">{t.footer}</p>
         </div>
       </footer>
@@ -228,4 +234,5 @@ function App() {
   )
 }
 
+export default App
 export default App

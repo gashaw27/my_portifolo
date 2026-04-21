@@ -100,7 +100,7 @@ function App() {
       langBtn: "አማርኛ", footer: "Built with  by Gashaw"
     },
     am: {
-      navAbout: "ስለ እኔ", navSkills: "ሙያ", navProjects: "ስራዎች",
+      navAbout: "ስለ እኔ",text:እኔ ለሶፍትዌር ልማት ከፍተኛ ፍላጎት ያለኝ የኮምፒውተር ሳይንስ ተማሪ ነኝ። ውስብስብ ችግሮችን መፍታት እና ዌብሳይቶችን መገንባት እወዳለሁ።" ,navSkills: "ሙያ", navProjects: "ስራዎች",
       heroHi: "ሰላም፣ እኔ", heroRole: "የኮምፒውተር ሳይንስ ተማሪ ነኝ", viewProject: "ስራዎች",
       aboutTitle: "ስለ እኔ", skillsTitle: "ሙያዎቼ", projectTitle: "ስራዎቼ",
       langBtn: "English", footer: "በጋሻው የተገነባ"

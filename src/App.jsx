@@ -54,7 +54,7 @@ function Calculator({ onClose }) {
         <div className="flex justify-between items-center mb-5 border-l-4 border-blue-600 pl-3">
           <div className="text-left">
             <h3 className="text-white font-black text-[10px] uppercase tracking-tighter">Gashaw Scientific</h3>
-            <span className="text-blue-500 font-bold text-[8px] uppercase tracking-widest">Premium v2.0</span>
+            <span className="text-blue-500 font-bold text-[8px] uppercase tracking-widest"></span>
           </div>
           <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-red-500 transition-all font-bold text-xs">✕</button>
         </div>
@@ -84,7 +84,7 @@ function App() {
       aboutP2: "Whether I’m architecting a database, refining a React component, or solving complex logic puzzles, I find joy in the process of creation. I’m a lifelong learner, always eager to adapt to new technologies and collaborate with creative minds.",
       skillsTitle: "Technical Foundations",
       projectTitle: "Featured Projects",
-      langBtn: "አማርኛ", footer: "Built with ❤️ by Gashaw"
+      langBtn: "አማርኛ", footer: "Built with  by Gashaw"
     },
     am: {
       navAbout: "ታሪኬ", navSkills: "ሙያ", navProjects: "ስራዎች",

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import myPhoto from './assets/me.png'
 
-// --- 1. Colorful Scientific Calculator Component ---
+// --- 1. Compact & Slim Scientific Calculator ---
 function Calculator({ onClose }) {
   const [display, setDisplay] = useState("");
   
@@ -19,18 +19,14 @@ function Calculator({ onClose }) {
     if (val === "=") {
       try {
         if (!display) return;
-        let expression = display;
-        expression = expression.replace(/√\(/g, 'Math.sqrt(');
-        expression = expression.replace(/sin\(([^)]+)\)/g, 'Math.sin(($1)*Math.PI/180)');
-        expression = expression.replace(/cos\(([^)]+)\)/g, 'Math.cos(($1)*Math.PI/180)');
-        expression = expression.replace(/tan\(([^)]+)\)/g, 'Math.tan(($1)*Math.PI/180)');
-
-        const result = eval(expression);
-        if (isNaN(result) || !isFinite(result)) throw new Error();
+        let exp = display;
+        exp = exp.replace(/√\(/g, 'Math.sqrt(');
+        exp = exp.replace(/sin\(([^)]+)\)/g, 'Math.sin(($1)*Math.PI/180)');
+        exp = exp.replace(/cos\(([^)]+)\)/g, 'Math.cos(($1)*Math.PI/180)');
+        exp = exp.replace(/tan\(([^)]+)\)/g, 'Math.tan(($1)*Math.PI/180)');
+        const result = eval(exp);
         setDisplay(String(Number(result).toFixed(3)));
-      } catch {
-        setDisplay("Error");
-      }
+      } catch { setDisplay("Error"); }
     } else if (val === "C") {
       setDisplay("");
     } else if (val === "DEL") {
@@ -40,9 +36,7 @@ function Calculator({ onClose }) {
     } else {
       if (operators.includes(val) && operators.includes(lastChar)) {
         setDisplay(display.slice(0, -1) + val);
-      } else {
-        setDisplay(display + val);
-      }
+      } else { setDisplay(display + val); }
     }
   };
 
@@ -55,48 +49,37 @@ function Calculator({ onClose }) {
     "0", ".", "DEL", "="
   ];
 
-  // Helper function to get button color
   const getBtnClass = (btn) => {
-    const redGroup = ["0", "DEL", ".", "=", "1", "2", "3", "+"];
-    const yellowGroup = ["4", "5", "6", "-", "7", "8", "9", "*"];
+    const red = ["0", "DEL", ".", "=", "1", "2", "3", "+"];
+    const yellow = ["4", "5", "6", "-", "7", "8", "9", "*"];
+    const common = "h-10 rounded-xl font-black text-[10px] transition-all active:scale-90 shadow-sm ";
     
-    if (redGroup.includes(btn)) {
-      return "bg-red-600 text-white hover:bg-red-500 shadow-lg shadow-red-900/40";
-    } else if (yellowGroup.includes(btn)) {
-      return "bg-yellow-500 text-slate-900 hover:bg-yellow-400 shadow-lg shadow-yellow-900/40";
-    } else {
-      // Green group (Everything else)
-      return "bg-green-600 text-white hover:bg-green-500 shadow-lg shadow-green-900/40";
-    }
+    if (red.includes(btn)) return common + "bg-red-600 text-white hover:bg-red-500 shadow-red-900/20";
+    if (yellow.includes(btn)) return common + "bg-yellow-500 text-slate-900 hover:bg-yellow-400 shadow-yellow-900/20";
+    return common + "bg-green-600 text-white hover:bg-green-500 shadow-green-900/20";
   };
 
   return (
-    <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-[200] flex items-center justify-center p-4">
-      <div className="bg-[#0f172a] w-full max-w-[340px] rounded-[2.5rem] p-6 shadow-2xl border border-slate-800 animate-in zoom-in duration-200">
-        <div className="flex justify-between items-center mb-6 pl-2 border-l-4 border-blue-600">
-          <div className="text-left">
-            <h3 className="text-white font-black tracking-tighter text-xs uppercase">Gashaw Scientific</h3>
-            <span className="text-blue-500 font-bold text-[8px] uppercase tracking-widest"></span>
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[200] flex items-center justify-center p-4">
+      <div className="bg-[#0f172a] w-full max-w-[280px] rounded-[2rem] p-4 shadow-2xl border border-slate-800 animate-in zoom-in duration-200">
+        <div className="flex justify-between items-center mb-4 px-1">
+          <div className="text-left border-l-2 border-blue-600 pl-2">
+            <h3 className="text-white font-black text-[9px] uppercase tracking-tighter">Gashaw Scientific</h3>
+            <span className="text-blue-500 font-bold text-[7px] uppercase tracking-widest"></span>
           </div>
-          <button onClick={onClose} className="w-10 h-10 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-red-500 transition-all font-bold">✕</button>
+          <button onClick={onClose} className="w-7 h-7 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-red-500 transition-all text-[10px]">✕</button>
         </div>
         
-        <div className="bg-slate-900 h-28 rounded-3xl mb-6 flex flex-col justify-center items-end px-6 border border-slate-800 shadow-inner overflow-hidden">
-          <span className="text-[9px] text-slate-500 uppercase font-black mb-1 tracking-widest">Display</span>
-          <div className="text-2xl md:text-3xl font-mono text-white text-right w-full overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <div className="bg-slate-900 h-20 rounded-2xl mb-4 flex flex-col justify-center items-end px-4 border border-slate-800 shadow-inner overflow-hidden">
+          <span className="text-[7px] text-slate-500 uppercase font-black mb-1">Display</span>
+          <div className="text-lg font-mono text-white text-right w-full overflow-x-auto whitespace-nowrap scrollbar-hide uppercase tracking-tighter">
             {display || "0"}
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-2">
           {buttons.map((btn) => (
-            <button
-              key={btn}
-              onClick={() => handleClick(btn)}
-              className={`h-12 md:h-14 rounded-2xl font-black text-sm transition-all active:scale-90 flex items-center justify-center ${getBtnClass(btn)}`}
-            >
-              {btn}
-            </button>
+            <button key={btn} onClick={() => handleClick(btn)} className={getBtnClass(btn)}>{btn}</button>
           ))}
         </div>
       </div>
@@ -104,7 +87,7 @@ function Calculator({ onClose }) {
   );
 }
 
-// --- 2. Main App ---
+// --- 2. Main App Component ---
 function App() {
   const [lang, setLang] = useState('en');
   const [showCalc, setShowCalc] = useState(false);
@@ -112,18 +95,14 @@ function App() {
   const content = {
     en: {
       navAbout: "About", navSkills: "Skills", navProjects: "Projects",
-      heroHi: "Hi, I'm", heroRole: "I am a CS Student", viewProject: "View My Projects",
-      aboutTitle: "About Me",
-      skillsTitle: "Technical Skills",
-      projectTitle: "Featured Projects",
+      heroHi: "Hi, I'm", heroRole: "I am a CS Student", viewProject: "View Projects",
+      aboutTitle: "About Me", skillsTitle: "Technical Skills", projectTitle: "My Projects",
       langBtn: "አማርኛ", footer: "Built with  by Gashaw"
     },
     am: {
       navAbout: "ስለ እኔ", navSkills: "ሙያ", navProjects: "ስራዎች",
-      heroHi: "ሰላም፣ እኔ", heroRole: "የኮምፒውተር ሳይንስ ተማሪ ነኝ", viewProject: "ስራዎቼን እይ",
-      aboutTitle: "ስለ እኔ",
-      skillsTitle: "ቴክኒካል ሙያዎቼ",
-      projectTitle: "የተመረጡ ስራዎች",
+      heroHi: "ሰላም፣ እኔ", heroRole: "የኮምፒውተር ሳይንስ ተማሪ ነኝ", viewProject: "ስራዎች",
+      aboutTitle: "ስለ እኔ", skillsTitle: "ሙያዎቼ", projectTitle: "ስራዎቼ",
       langBtn: "English", footer: "በጋሻው የተገነባ"
     }
   };
@@ -140,7 +119,7 @@ function App() {
              <img src={myPhoto} className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-blue-500" alt="logo" />
              <span className="text-xl font-black italic tracking-tighter">GASHAW<span className="text-blue-600">.</span></span>
           </div>
-          <div className="hidden md:flex items-center gap-8 font-bold text-[10px] uppercase tracking-[0.2em] text-slate-400">
+          <div className="hidden md:flex items-center gap-8 font-bold text-[10px] uppercase tracking-widest text-slate-400">
             <a href="#about" className="hover:text-blue-600 transition-all">{t.navAbout}</a>
             <a href="#skills" className="hover:text-blue-600 transition-all">{t.navSkills}</a>
             <a href="#projects" className="hover:text-blue-600 transition-all">{t.navProjects}</a>
@@ -154,61 +133,58 @@ function App() {
       <section id="home" className="pt-32 pb-20 md:pt-60 md:pb-40 text-center px-4">
         <h2 className="text-5xl md:text-9xl font-black mb-4 tracking-tighter leading-none">{t.heroHi} <span className="text-blue-600">Gashaw ...</span></h2>
         <p className="text-lg md:text-3xl font-bold text-slate-300 mb-10 uppercase tracking-widest">{t.heroRole}</p>
-        <a href="#projects" className="inline-block bg-blue-600 text-white px-10 py-5 rounded-2xl font-black shadow-2xl shadow-blue-200 hover:scale-105 transition-all uppercase tracking-widest text-xs">View Projects</a>
+        <a href="#projects" className="inline-block bg-blue-600 text-white px-10 py-4 rounded-2xl font-black shadow-2xl hover:scale-105 transition-all uppercase tracking-widest text-[10px]">{t.viewProject}</a>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="max-w-6xl mx-auto px-4 py-20 border-t border-slate-50 text-center md:text-left">
-        <h2 className="text-3xl md:text-5xl font-black text-center mb-20 uppercase tracking-tighter">{t.aboutTitle}</h2>
+      {/* About */}
+      <section id="about" className="max-w-6xl mx-auto px-4 py-20 border-t border-slate-50">
+        <h2 className="text-3xl md:text-5xl font-black text-center mb-16 uppercase tracking-tighter">{t.aboutTitle}</h2>
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-24">
-          <img src={myPhoto} className="w-56 h-56 md:w-80 md:h-80 object-cover rounded-[3rem] border-8 border-slate-50 shadow-2xl" alt="Gashaw" />
-          <div className="text-base md:text-xl text-slate-500 leading-relaxed font-medium max-w-2xl">
-            <p className="mb-6">I am a 3rd-year Computer Science student passionate about software engineering. I specialize in building logical systems and modern web applications.</p>
-            <p>Constantly learning, building, and solving complex problems with code.</p>
+          <img src={myPhoto} className="w-52 h-52 md:w-80 md:h-80 object-cover rounded-[2.5rem] border-8 border-slate-50 shadow-2xl" alt="Gashaw" />
+          <div className="text-base md:text-xl text-slate-500 leading-relaxed font-medium text-center md:text-left">
+             <p>I am a 3rd-year Computer Science student passionate about software engineering and modern development.</p>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="bg-slate-50 py-24">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-black text-slate-800 mb-20 uppercase tracking-tighter">{t.skillsTitle}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Languages", skills: "C++, Java, Python, PHP, JS", color: "border-green-500" },
-              { title: "Web Dev", skills: "HTML5, CSS3, Node.js, React, SQL", color: "border-blue-500" },
-              { title: "Logic", skills: "DSA, OS, Networking, Database", color: "border-emerald-500" },
-              { title: "Systems", skills: "SE, COA, DLD, Microprocessors", color: "border-teal-500" }
-            ].map((item, i) => (
-              <div key={i} className={`bg-white p-10 rounded-[2.5rem] shadow-sm border-t-8 ${item.color} hover:shadow-xl transition-all`}>
-                <h3 className="text-xl font-black mb-4 text-slate-800">{item.title}</h3>
-                <p className="text-slate-400 font-bold text-xs uppercase tracking-widest leading-loose">{item.skills}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="max-w-6xl mx-auto px-4 py-24">
-        <h2 className="text-3xl md:text-5xl font-black text-center mb-20 uppercase tracking-tighter">{t.projectTitle}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+      {/* Skills */}
+      <section id="skills" className="bg-slate-50 py-24 px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-black text-slate-800 mb-16 uppercase tracking-tighter">{t.skillsTitle}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {[
-            { name: "Web Programming", desc: "Scientific Calculator with React.", run: true },
+            { title: "Languages", skills: "C++, Java, Python, PHP, JS", color: "border-green-500" },
+            { title: "Web Dev", skills: "HTML5, CSS3, Node.js, React, SQL", color: "border-blue-500" },
+            { title: "Logic", skills: "DSA, OS, Networking, Database", color: "border-emerald-500" },
+            { title: "Systems", skills: "SE, COA, DLD, Microprocessors", color: "border-teal-500" }
+          ].map((item, i) => (
+            <div key={i} className={`bg-white p-8 rounded-[2rem] border-t-8 ${item.color} shadow-sm hover:shadow-xl transition-all`}>
+              <h3 className="text-lg font-black mb-2">{item.title}</h3>
+              <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">{item.skills}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="max-w-6xl mx-auto px-4 py-24">
+        <h2 className="text-3xl md:text-5xl font-black text-center mb-16 uppercase tracking-tighter">{t.projectTitle}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { name: "Web Programming", desc: "Scientific Calculator with Logic.", run: true },
             { name: "C++ System", desc: "Pharmacy Management System.", run: false },
             { name: "Networking", desc: "Campus Network Architecture.", run: false }
           ].map((proj, i) => (
-            <div key={i} className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-100/50 hover:shadow-2xl transition-all flex flex-col justify-between">
+            <div key={i} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-100/30 hover:shadow-2xl transition-all flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-black mb-2 text-blue-600 uppercase tracking-tighter">{proj.name}</h3>
-                <p className="text-slate-500 font-bold mb-8 text-xs italic">{proj.desc}</p>
+                <p className="text-slate-500 font-bold mb-8 text-[10px] italic">{proj.desc}</p>
               </div>
-              <div className="space-y-4">
-                <button className="w-full py-4 bg-slate-950 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all">View Code</button>
+              <div className="space-y-3">
+                <button className="w-full py-3 bg-slate-950 text-white rounded-xl font-black text-[10px] uppercase tracking-widest">Code</button>
                 {proj.run ? (
-                  <button onClick={() => setShowCalc(true)} className="w-full py-4 bg-green-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-green-700">Run Live</button>
+                  <button onClick={() => setShowCalc(true)} className="w-full py-3 bg-green-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-green-700">Run</button>
                 ) : (
-                  <button className="w-full py-4 bg-slate-50 text-slate-200 rounded-2xl font-black text-[10px] cursor-not-allowed uppercase">Offline</button>
+                  <button className="w-full py-3 bg-slate-50 text-slate-300 rounded-xl font-black text-[10px] cursor-not-allowed uppercase">Offline</button>
                 )}
               </div>
             </div>
@@ -217,22 +193,22 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="bg-slate-950 text-white pt-24 pb-12 px-6">
+      <footer className="bg-slate-950 text-white pt-20 pb-10 px-6 mt-10">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          <div className="text-4xl font-black mb-12 italic tracking-tighter uppercase">GASHAW<span className="text-blue-500">.</span></div>
-          <div className="flex gap-6 mb-16">
-            <a href="#" target="_blank" className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all border border-slate-800">
-              <svg className="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <div className="text-4xl font-black mb-8 italic uppercase tracking-tighter">GASHAW<span className="text-blue-500">.</span></div>
+          <div className="flex gap-6 mb-12">
+            <a href="#" className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all border border-slate-800">
+               <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
-            <a href="https://github.com/gashaw27" target="_blank" className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-slate-800 transition-all border border-slate-800">
-              <svg className="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/gashaw27" className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-slate-800 transition-all border border-slate-800">
+               <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </a>
-            <a href="https://t.me/gaga2327" target="_blank" className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center hover:bg-sky-500 transition-all border border-slate-800">
-              <svg className="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-2.003 9.464c-.149.659-.541.823-1.091.515l-3.051-2.247-1.472 1.417c-.163.163-.3.299-.614.299l.219-3.107 5.655-5.108c.246-.219-.054-.341-.381-.123l-6.991 4.402-3.012-.942c-.655-.205-.668-.655.137-.969l11.771-4.535c.545-.205 1.022.122.842.928z"/></svg>
+            <a href="https://t.me/gaga2327" className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center hover:bg-sky-500 transition-all border border-slate-800">
+               <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-2.003 9.464c-.149.659-.541.823-1.091.515l-3.051-2.247-1.472 1.417c-.163.163-.3.299-.614.299l.219-3.107 5.655-5.108c.246-.219-.054-.341-.381-.123l-6.991 4.402-3.012-.942c-.655-.205-.668-.655.137-.969l11.771-4.535c.545-.205 1.022.122.842.928z"/></svg>
             </a>
           </div>
-          <a href="mailto:gashaw@gmail.com" className="text-slate-400 font-bold text-lg mb-10 hover:text-blue-500 transition-all underline decoration-blue-500/20 underline-offset-8 italic">gashaw@gmail.com</a>
-          <p className="text-slate-800 font-black text-[9px] uppercase tracking-[0.5em]">{t.footer}</p>
+          <a href="mailto:gashaw@gmail.com" className="text-slate-400 font-bold text-sm mb-6 underline decoration-blue-500/20 italic">gashaw@gmail.com</a>
+          <p className="text-slate-800 font-black text-[8px] uppercase tracking-[0.5em]">{t.footer}</p>
         </div>
       </footer>
 

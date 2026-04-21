@@ -142,7 +142,7 @@ function App() {
         <div className="flex flex-col md:flex-row items-center gap-10 md:gap-24">
           <img src={myPhoto} className="w-52 h-52 md:w-80 md:h-80 object-cover rounded-[2.5rem] border-8 border-slate-50 shadow-2xl" alt="Gashaw" />
           <div className="text-base md:text-xl text-slate-500 leading-relaxed font-medium text-center md:text-left">
-             <p>I am a 3rd-year Computer Science student passionate about software engineering and modern development.</p>
+             <p>I am a passionate Computer Science student who loves solving complex problems and building user-friendly applications. My goal is to use technology to create a positive impact.</p>
           </div>
         </div>
       </section>

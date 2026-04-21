@@ -109,7 +109,7 @@ function App() {
       aboutTitle: "About Me",
       skillsTitle: "Technical Skills",
       projectTitle: "Featured Projects",
-      langBtn: "አማርኛ", footer: "Built with ❤️ by Gashaw"
+      langBtn: "አማርኛ", footer: "Built with  by Gashaw"
     },
     am: {
       navAbout: "ስለ እኔ", navSkills: "ሙያ", navProjects: "ስራዎች",
